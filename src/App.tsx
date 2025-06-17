@@ -5,6 +5,7 @@ import State from "./pages/fundamental/State"
 import Component from "./pages/fundamental/Component"
 import ConditionalRendering from "./pages/fundamental/ConditionalRendering"
 import ListKey from "./pages/fundamental/ListKey"
+import ColorBox from "./sampleApp/ColorBox"
 
 function App() {
 
@@ -30,7 +31,8 @@ function App() {
       <br />
       <ListKey />
 
-
+      <br />
+      <ColorBox />
       
       <br />
       <br />
