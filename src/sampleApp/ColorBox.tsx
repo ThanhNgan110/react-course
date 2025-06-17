@@ -1,9 +1,19 @@
 import { useState } from "react";
 
+import type { BoxItemProps } from "./types";
+
 import styles from "./styles/index.module.css";
 
 // Colors array
 const arrColors = ["red", "yellow", "aqua", "purple"];
+
+const BoxItem = ({ label, color, onClick }: BoxItemProps) => {
+	return (
+		<div style={{ backgroundColor: color }} onClick={onClick}>
+			{label}
+		</div>
+	);
+};
 
 const ColorBox = () => {
 	const [colorDefault, setColorDefault] = useState<string[]>(arrColors);
@@ -41,20 +51,6 @@ const ColorBox = () => {
 				))}
 			</div>
 		</>
-	);
-};
-
-type BoxItemProps = {
-	label: string;
-	color: string;
-	onClick: () => void;
-};
-
-const BoxItem = ({ label, color, onClick }: BoxItemProps) => {
-	return (
-		<div style={{ backgroundColor: color }} onClick={onClick}>
-			{label}
-		</div>
 	);
 };
 

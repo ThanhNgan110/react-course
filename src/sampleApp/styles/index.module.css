@@ -13,3 +13,8 @@
 	align-items: center;
 	justify-content: center;
 }
+
+.boxItem {
+	cursor: pointer;
+	border-radius: 5px;
+}
