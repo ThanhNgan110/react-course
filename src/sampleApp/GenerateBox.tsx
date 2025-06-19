@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 
-import type { BoxItemProps } from "./types";
+import type { BoxItemProps, BoxProps, FormProps } from "./types";
 
 import style from "./styles/index.module.css";
 
-const BoxItem = ({ color = "#FAEBD7", label, onClick }: BoxItemProps) => {
+const BoxItem = ({ color, label, onClick }: BoxItemProps) => {
 	return (
 		<div
 			className={style.boxItem}
@@ -14,10 +14,6 @@ const BoxItem = ({ color = "#FAEBD7", label, onClick }: BoxItemProps) => {
 			Box #{label}
 		</div>
 	);
-};
-
-type FormProps = {
-	onGenerateItem: (input: number) => void;
 };
 
 const Form = ({ onGenerateItem }: FormProps) => {
@@ -30,6 +26,7 @@ const Form = ({ onGenerateItem }: FormProps) => {
 		}
 
 		onGenerateItem(Number(inputValue));
+		setInputValue("");
 	};
 
 	const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -45,17 +42,38 @@ const Form = ({ onGenerateItem }: FormProps) => {
 	);
 };
 
+const randomColor = () => {
+	return Math.floor(Math.random() * 16777215).toString(16);
+};
+
 const GenerateBox = () => {
-	const [box, setBox] = useState<number>(0);
+	const [box, setBox] = useState<BoxProps[]>([]);
 	const [message, setMessage] = useState<string>("");
 
 	const handleGenerateItem = (inputValue: number) => {
-		setBox(inputValue);
-		if (box === 0) {
+		if (inputValue === 0) {
+			setBox([]);
 			setMessage("No box");
+		} else {
+			const newBox = Array.from({ length: inputValue }, (_, i) => ({
+				label: i + 1,
+				color: "#FAEBD7",
+			}));
+			setBox(newBox);
 		}
+	};
 
-		console.log("data", inputValue);
+	const handleChangeColor = (index: number) => {
+		setBox((prev) =>
+			prev.map((box, i) =>
+				i === index
+					? {
+							...box,
+							color: `#${randomColor()}`,
+					  }
+					: box
+			)
+		);
 	};
 
 	return (
@@ -63,10 +81,16 @@ const GenerateBox = () => {
 			<h1>Sample App - GenerateBox</h1>
 			<Form onGenerateItem={handleGenerateItem} />
 			<div className={style.boxWrapper}>
-				{box === 0
+				{box.length === 0
 					? message
-					: Array.from({ length: box }, (_, i) => <BoxItem label={i + 1} />)}
-
+					: box.map((item, index) => (
+							<BoxItem
+								label={item.label}
+								color={item.color}
+								key={`${item.label}`}
+								onClick={() => handleChangeColor(index)}
+							/>
+					  ))}
 			</div>
 		</>
 	);
