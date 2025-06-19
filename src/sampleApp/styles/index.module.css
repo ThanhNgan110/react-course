@@ -17,4 +17,19 @@
 .boxItem {
 	cursor: pointer;
 	border-radius: 5px;
+	display: flex;
+	align-items: center;
+    justify-content: center;
+	gap: 15px;
+	width: 100px;
+	height: 100px;
+}
+
+.boxWrapper {
+	margin-top: 20px;
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	width: 500px;
+	gap: 25px;
 }

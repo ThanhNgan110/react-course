@@ -1,5 +1,5 @@
 export type BoxItemProps = {
-	label: string;
+	label: string | number;
 	color: string;
 	onClick: () => void;
 };
