@@ -65,3 +65,8 @@ $ git merge --no-ff feature/show-popup-error
 $ git checkout qc
 $ git merge --no-ff develop
 ```
+
+
+## React render
+- first render: component render with initial state
+- next render: component render with new stat
