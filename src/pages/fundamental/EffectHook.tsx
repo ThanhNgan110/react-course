@@ -88,6 +88,14 @@ function EffectHook() {
       <button type="button" onClick={() => setPage(prev => prev - 1)}>Prev Page</button>
       {page}
       <button type="button" onClick={() => setPage(prev => prev + 1)}>Next Page</button>
+
+      <br /> <br />
+      <div className='boxEffect box1'>
+          Box 1
+      </div>
+      <div className='boxEffect box2'>
+        Box 2
+      </div>
     </div>
   )
 }

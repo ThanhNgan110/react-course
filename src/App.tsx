@@ -11,6 +11,7 @@ import Form from "./pages/fundamental/Form"
 import StateHook from "./pages/fundamental/StateHook";
 import EffectHook from "./pages/fundamental/EffectHook";
 import React from "react";
+import ContextHook from "./pages/fundamental/ContextHook";
 
 
 function App() {
@@ -52,6 +53,9 @@ function App() {
 			<br />
 			<button type="button" onClick={() => setMount(prev => !prev)}>Mount Effect Hook</button>
 			{mount && <EffectHook />}
+
+			<br />
+			<ContextHook />
 
 			<br />
 			<br />
