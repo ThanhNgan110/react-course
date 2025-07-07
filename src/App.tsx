@@ -1,20 +1,22 @@
-import GenerateBox from "./sampleApp/GenerateBox";
-import DemoChildren from "./pages/fundamental/DemoChildren"
-import JSX from "./pages/fundamental/JSX"
-import Props from "./pages/fundamental/Props"
-import State from "./pages/fundamental/State"
-import Component from "./pages/fundamental/Component"
-import ConditionalRendering from "./pages/fundamental/ConditionalRendering"
-import ListKey from "./pages/fundamental/ListKey"
-import PropsDrillingLiftingStateUp from "./pages/fundamental/PropsDrillingLiftingStateUp"
-import Form from "./pages/fundamental/Form"
-import StateHook from "./pages/fundamental/StateHook";
-import EffectHook from "./pages/fundamental/EffectHook";
-import React from "react";
+import React from 'react'
+import GenerateBox from './sampleApp/GenerateBox'
+import DemoChildren from './pages/fundamental/DemoChildren'
+import JSX from './pages/fundamental/JSX'
+import Props from './pages/fundamental/Props'
+import State from './pages/fundamental/State'
+import Component from './pages/fundamental/Component'
+import ConditionalRendering from './pages/fundamental/ConditionalRendering'
+import ListKey from './pages/fundamental/ListKey'
+import PropsDrillingLiftingStateUp from './pages/fundamental/PropsDrillingLiftingStateUp'
+import Form from './pages/fundamental/Form'
+import StateHook from './pages/fundamental/StateHook'
+import EffectHook from './pages/fundamental/EffectHook'
+import TrafficLight from './sampleApp/TrafficLight'
 
+import { colors } from './sampleApp/mockData'
 
 function App() {
-	const [mount, setMount] = React.useState(true);
+	const [mount, setMount] = React.useState(true)
 	return (
 		<>
 			<JSX />
@@ -40,20 +42,23 @@ function App() {
 			<br />
 			<GenerateBox />
 
-      <br />
-      <PropsDrillingLiftingStateUp />
+			<br />
+			<PropsDrillingLiftingStateUp />
 
-      <br />
-      <Form />
+			<br />
+			<Form />
 
 			<br />
 			<StateHook />
 
 			<br />
-			<button type="button" onClick={() => setMount(prev => !prev)}>Mount Effect Hook</button>
+			<button type="button" onClick={() => setMount(prev => !prev)}>
+				Mount Effect Hook
+			</button>
 			{mount && <EffectHook />}
 
 			<br />
+			{/* <TrafficLight colors ={colors} /> */}
 			<br />
 			<br />
 			<br />
@@ -61,7 +66,7 @@ function App() {
 			<br />
 			<br />
 		</>
-	);
+	)
 }
 
-export default App;
+export default App

@@ -19,7 +19,7 @@
 	border-radius: 5px;
 	display: flex;
 	align-items: center;
-    justify-content: center;
+	justify-content: center;
 	gap: 15px;
 	width: 100px;
 	height: 100px;
@@ -32,4 +32,22 @@
 	flex-wrap: wrap;
 	width: 500px;
 	gap: 25px;
+}
+
+.trafficLightContainer {
+	display: flex;
+	flex-direction: column;
+	background-color: #000;
+	border-radius: 8px;
+	padding: 8px;
+	gap: 8px;
+	flex-wrap: nowrap;
+	align-items: center;
+	max-width: 70px;
+}
+
+.light {
+	border-radius: 50px;
+	height: 50px;
+	width: 50px;
 }
