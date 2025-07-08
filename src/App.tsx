@@ -58,7 +58,7 @@ function App() {
 			{mount && <EffectHook />}
 
 			<br />
-			{/* <TrafficLight colors ={colors} /> */}
+			<TrafficLight colors={colors} />
 			<br />
 			<br />
 			<br />

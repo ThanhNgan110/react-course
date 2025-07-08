@@ -22,3 +22,9 @@ export type Light = {
 export type ColorName = 'red' | 'green' | 'yellow'
 
 export type Colors = Record<ColorName, Light>
+
+export interface ApiResponse<T> {
+	data?: T | null
+	success: boolean
+	msg?: string
+}
