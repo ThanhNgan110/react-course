@@ -1,21 +1,25 @@
-import React, { type ReactNode } from 'react'
+import React, { useState } from 'react'
 
 import style from './styles/index.module.css'
 
-import { JobService } from './services/job-service'
+import { ApiService } from './services/api-service'
+
+import type { Job } from './types'
+
+import { PAGE_SIZE } from './constants'
 
 type PostItemProps = {
-	title: string
-	author: string
-	date: ReactNode
+	post: Job
 }
 
-const PostItem = ({ title, author, date }: PostItemProps) => {
+const PostItem = ({ post }: PostItemProps) => {
+	const { data } = post
+
 	return (
 		<div className={style.post}>
-			<h2 className={style.postTitle}>{title}</h2>
+			<h2 className={style.postTitle}>{data.title}</h2>
 			<p className={style.postContent}>
-				{author} {date}
+				{data.by} <span>{new Date(Number(data.time) * 1000).toLocaleString()}</span>
 			</p>
 		</div>
 	)
@@ -23,18 +27,60 @@ const PostItem = ({ title, author, date }: PostItemProps) => {
 
 const Post = () => {
 	const [isLoading, setIsLoading] = React.useState<boolean>(false)
+	const [jobs, setJobs] = React.useState<Job[]>([])
+	const [jobId, setJobId] = React.useState(null)
+	const [page, setPage] = useState(0)
 
-	const fetchIdJobs =  () => {
-		//
+	React.useEffect(() => {
+		fetchJobs(page)
+	}, [page])
+
+	const fetchJobs = async (currPage: number) => {
+		setIsLoading(true)
+		const idJobs = await fetchIdJobs(currPage)
+		const posts = idJobs?.map(id => {
+			const jobService = new ApiService<Job>('https://hacker-news.firebaseio.com/v0', `item/${id}.json`)
+			const postDetail = jobService.get()
+			return postDetail
+		})
+
+		const jobs = await Promise.all(posts)
+		setJobs(jobs)
+		setIsLoading(false)
 	}
 
-	React.useEffect(() => {}, [])
+	const fetchIdJobs = async (currPage: number) => {
+		const jobService = new ApiService<{ data: number[]; success: boolean }>(
+			'https://hacker-news.firebaseio.com/v0',
+			'/jobstories.json',
+		)
+		const { data } = await jobService.get()
+		console.log(data)
+		const start = currPage * PAGE_SIZE
+		const end = start + PAGE_SIZE
+		let listIds = []
+		if (data) {
+			listIds = Object.values(data).slice(start, end)
+			return listIds
+		}
+	}
 
 	return (
 		<>
 			<div className={style.jobs}>
-				<h1>Job Board</h1>
-				<PostItem />
+				<h1 className={style.title}>Job Board</h1>
+				{isLoading ? (
+					<p>Loading...</p>
+				) : (
+					<>
+						{jobs.map((post, index) => (
+							<PostItem key={index} post={post} />
+						))}
+						<button type="button" onClick={() => setPage(page + 1)}>
+							Load more jobs
+						</button>
+					</>
+				)}
 			</div>
 		</>
 	)

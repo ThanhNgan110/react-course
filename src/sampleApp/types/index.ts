@@ -23,6 +23,12 @@ export type ColorName = 'red' | 'green' | 'yellow'
 
 export type Colors = Record<ColorName, Light>
 
+export interface Job {
+	title: string
+	by: string
+	time: Date
+}
+
 export interface ApiResponse<T> {
 	data?: T | null
 	success: boolean

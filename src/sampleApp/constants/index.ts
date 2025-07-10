@@ -1,1 +1,1 @@
-export const URL_API = ' https://hacker-news.firebaseio.com'
+export const PAGE_SIZE = 6

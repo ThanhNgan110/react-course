@@ -58,7 +58,7 @@
 	border-radius: 4px;
 	padding: 16px;
 	display: flex;
-	gap: 8px;
+	flex-direction: column;
 }
 
 .postTitle {
@@ -70,10 +70,18 @@
 .postContent {
 	font-size: 14px;
 	color: #444;
+	margin: 0;
 }
 
 .jobs {
 	display: flex;
 	flex-direction: column;
 	gap: 10px;
+}
+
+.title {
+	font-size: 24px;
+	font-weight: 700;
+	color: #f60;
+	margin-bottom: 24px;
 }

@@ -1,9 +1,9 @@
 import type { ApiResponse } from '../types'
 
-class ApiService<T> {
-	resourceUrl: string
+export class ApiService<T> {
+	private resourceUrl: string
 
-	constructor(urlApi: string, nameResource?: string) {
+	constructor(urlApi: string, nameResource: string) {
 		this.resourceUrl = `${urlApi}/${nameResource}`
 	}
 
@@ -38,5 +38,3 @@ class ApiService<T> {
 		}
 	}
 }
-
-export default ApiService
