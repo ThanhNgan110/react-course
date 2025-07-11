@@ -14,6 +14,7 @@ import EffectHook from './pages/fundamental/EffectHook'
 import TrafficLight from './sampleApp/TrafficLight'
 
 import { colors } from './sampleApp/mockData'
+import Post from './sampleApp/JobsBoard'
 
 function App() {
 	const [mount, setMount] = React.useState(true)
@@ -58,7 +59,9 @@ function App() {
 			{mount && <EffectHook />}
 
 			<br />
+			<TrafficLight colors={colors} />
 			<br />
+			<Post />
 			<br />
 			<br />
 			<br />

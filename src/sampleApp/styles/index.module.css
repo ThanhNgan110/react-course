@@ -85,3 +85,13 @@
 	color: #f60;
 	margin-bottom: 24px;
 }
+
+.btn {
+	cursor: pointer;
+	background-color: #f60;
+	border: none;
+	border-radius: 4px;
+	color: #fff;
+	margin-top: 20px;
+	padding: 8px 12px;
+}

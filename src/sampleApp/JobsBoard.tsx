@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, type MouseEventHandler } from 'react'
 
 import style from './styles/index.module.css'
 
@@ -13,13 +13,11 @@ type PostItemProps = {
 }
 
 const PostItem = ({ post }: PostItemProps) => {
-	const { data } = post
-
 	return (
 		<div className={style.post}>
-			<h2 className={style.postTitle}>{data.title}</h2>
+			<h2 className={style.postTitle}>{post.title}</h2>
 			<p className={style.postContent}>
-				{data.by} <span>{new Date(Number(data.time) * 1000).toLocaleString()}</span>
+				{post.by} <span>{new Date(Number(post.time) * 1000).toLocaleString()}</span>
 			</p>
 		</div>
 	)
@@ -28,57 +26,66 @@ const PostItem = ({ post }: PostItemProps) => {
 const Post = () => {
 	const [isLoading, setIsLoading] = React.useState<boolean>(false)
 	const [jobs, setJobs] = React.useState<Job[]>([])
-	const [jobId, setJobId] = React.useState(null)
-	const [page, setPage] = useState(0)
+	const [jobIds, setJobIds] = React.useState<number[]>([])
+	const [page, setPage] = useState<number>(0)
+
+	React.useEffect(() => {
+		fetchIdJobs()
+	}, [])
 
 	React.useEffect(() => {
 		fetchJobs(page)
-	}, [page])
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [jobIds, page])
 
 	const fetchJobs = async (currPage: number) => {
+		const start = currPage * PAGE_SIZE
+		const end = start + PAGE_SIZE
+		const listIds = Object.values(jobIds).slice(start, end)
 		setIsLoading(true)
-		const idJobs = await fetchIdJobs(currPage)
-		const posts = idJobs?.map(id => {
+		const post = listIds?.map(async id => {
 			const jobService = new ApiService<Job>('https://hacker-news.firebaseio.com/v0', `item/${id}.json`)
-			const postDetail = jobService.get()
-			return postDetail
+			const response = await jobService.get()
+			return response.data
 		})
 
-		const jobs = await Promise.all(posts)
-		setJobs(jobs)
+		const currentJob = await Promise.all(post ?? [])
+		const validJobs = currentJob.filter((job): job is Job => job !== null)
+		setJobs(prev => [...prev, ...validJobs])
 		setIsLoading(false)
 	}
 
-	const fetchIdJobs = async (currPage: number) => {
+	const fetchIdJobs = async () => {
 		const jobService = new ApiService<{ data: number[]; success: boolean }>(
 			'https://hacker-news.firebaseio.com/v0',
 			'/jobstories.json',
 		)
 		const { data } = await jobService.get()
-		console.log(data)
-		const start = currPage * PAGE_SIZE
-		const end = start + PAGE_SIZE
-		let listIds = []
-		if (data) {
-			listIds = Object.values(data).slice(start, end)
-			return listIds
+		if (Array.isArray(data)) {
+			setJobIds(data)
 		}
+	}
+
+	const handleChangePage: MouseEventHandler<HTMLButtonElement> = () => {
+		setPage(prev => prev + 1)
 	}
 
 	return (
 		<>
 			<div className={style.jobs}>
 				<h1 className={style.title}>Job Board</h1>
-				{isLoading ? (
+				{isLoading && jobs.length === 0 ? (
 					<p>Loading...</p>
 				) : (
 					<>
 						{jobs.map((post, index) => (
 							<PostItem key={index} post={post} />
 						))}
-						<button type="button" onClick={() => setPage(page + 1)}>
-							Load more jobs
-						</button>
+						{(page + 1) * PAGE_SIZE < jobIds.length && (
+							<button className={style.btn} type="button" onClick={handleChangePage}>
+								{isLoading ? 'Loading...' : 'Load more jobs'}
+							</button>
+						)}
 					</>
 				)}
 			</div>
