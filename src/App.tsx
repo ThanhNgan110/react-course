@@ -13,9 +13,14 @@ import EffectHook from "./pages/fundamental/EffectHook";
 import React from "react";
 import ContextHook from "./pages/fundamental/ContextHook";
 
+import TrafficLight from './sampleApp/TrafficLight'
+
+import { colors } from './sampleApp/mockData'
+import Post from './sampleApp/JobsBoard'
+import JobBoardTony from './sampleApp/JobsBoardTony'
 
 function App() {
-	const [mount, setMount] = React.useState(true);
+	const [mount, setMount] = React.useState(true)
 	return (
 		<>
 			<JSX />
@@ -41,31 +46,39 @@ function App() {
 			<br />
 			<GenerateBox />
 
-      <br />
-      <PropsDrillingLiftingStateUp />
+			<br />
+			<PropsDrillingLiftingStateUp />
 
-      <br />
-      <Form />
+			<br />
+			<Form />
 
 			<br />
 			<StateHook />
 
 			<br />
-			<button type="button" onClick={() => setMount(prev => !prev)}>Mount Effect Hook</button>
+			<button type="button" onClick={() => setMount(prev => !prev)}>
+				Mount Effect Hook
+			</button>
 			{mount && <EffectHook />}
 
 			<br />
 			<ContextHook />
 
 			<br />
+			<TrafficLight colors={colors} />
 			<br />
+			{/* <Post /> */}
+
+			<br />
+			<JobBoardTony />
+
 			<br />
 			<br />
 			<br />
 			<br />
 			<br />
 		</>
-	);
+	)
 }
 
-export default App;
+export default App
