@@ -19,7 +19,7 @@
 	border-radius: 5px;
 	display: flex;
 	align-items: center;
-    justify-content: center;
+	justify-content: center;
 	gap: 15px;
 	width: 100px;
 	height: 100px;
@@ -32,4 +32,66 @@
 	flex-wrap: wrap;
 	width: 500px;
 	gap: 25px;
+}
+
+.trafficLightContainer {
+	display: flex;
+	flex-direction: column;
+	background-color: #000;
+	border-radius: 8px;
+	padding: 8px;
+	gap: 8px;
+	flex-wrap: nowrap;
+	align-items: center;
+	max-width: 70px;
+}
+
+.light {
+	border-radius: 50px;
+	height: 50px;
+	width: 50px;
+}
+
+.post {
+	background-color: #fff;
+	border: 1px solid #dcdcdc;
+	border-radius: 4px;
+	padding: 16px;
+	display: flex;
+	flex-direction: column;
+}
+
+.postTitle {
+	font-size: 16px;
+	font-weight: 700;
+	margin-top: 0;
+}
+
+.postContent {
+	font-size: 14px;
+	color: #444;
+	margin: 0;
+}
+
+.jobs {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.title {
+	font-size: 24px;
+	font-weight: 700;
+	color: #f60;
+	margin-bottom: 24px;
+}
+
+.btn {
+	cursor: pointer;
+	background-color: #f60;
+	border: none;
+	border-radius: 4px;
+	color: #fff;
+	margin-top: 20px;
+	padding: 8px 12px;
 }
