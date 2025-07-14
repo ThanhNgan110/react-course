@@ -23,51 +23,51 @@ const PostItem = ({ post }: PostItemProps) => {
 	)
 }
 
-const Post = () => {
+const JobBoardTony = () => {
 	const [isLoading, setIsLoading] = React.useState<boolean>(false)
 	const [jobs, setJobs] = React.useState<Job[]>([])
 	const [jobIds, setJobIds] = React.useState<number[]>([])
 	const [page, setPage] = useState<number>(0)
 
-	React.useEffect(() => {
-		console.log('fetchIdJob')
-		fetchIdJobs()
-	}, [])
+	// React.useEffect(() => {
+	// 	console.log('fetchIdJob')
+	// 	fetchIdJobs()
+	// }, [])
 
 	React.useEffect(() => {
-		if (jobIds.length === 0) return;
-		console.log('fetchJobs')
-
 		fetchJobs(page)
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [jobIds, page])
+	}, [page])
 
 	const fetchJobs = async (currPage: number) => {
-		const start = currPage * PAGE_SIZE
-		const end = start + PAGE_SIZE
-		const listIds = Object.values(jobIds).slice(start, end)
+		const jobIdForPage = await fetchIdJobs(currPage);
 		setIsLoading(true)
-		const post = listIds.map(async id => {
+		const post = jobIdForPage.map(async (id: number) => {
 			const jobService = new ApiService<Job>('https://hacker-news.firebaseio.com/v0', `item/${id}.json`)
 			const response = await jobService.get()
 			return response.data
 		})
-
 		const currentJob = await Promise.all(post ?? [])
 		const validJobs = currentJob.filter((job): job is Job => job !== null)
 		setJobs(prev => [...prev, ...validJobs])
 		setIsLoading(false)
 	}
 
-	const fetchIdJobs = async () => {
-		const jobService = new ApiService<{ data: number[]; success: boolean }>(
-			'https://hacker-news.firebaseio.com/v0',
-			'/jobstories.json',
-		)
-		const { data } = await jobService.get()
-		if (Array.isArray(data)) {
-			setJobIds(data)
+	const fetchIdJobs = async (currPage: number) => {
+		let _jobIds = jobIds;
+
+		if (jobs.length === 0) {
+			const jobService = new ApiService<{ data: number[]; success: boolean }>(
+				'https://hacker-news.firebaseio.com/v0',
+				'/jobstories.json',
+			)
+			const { data } = await jobService.get() as any;
+			_jobIds = data;
+			setJobIds(data);
 		}
+
+		const start = currPage * PAGE_SIZE
+		const end = start + PAGE_SIZE;
+		return (_jobIds || []).slice(start, end)
 	}
 
 	const handleChangePage: MouseEventHandler<HTMLButtonElement> = () => {
@@ -77,7 +77,7 @@ const Post = () => {
 	return (
 		<>
 			<div className={style.jobs}>
-				<h1 className={style.title}>Job Board</h1>
+				<h1 className={style.title}>Job Board Tony</h1>
 				{isLoading && jobs.length === 0 ? (
 					<p>Loading...</p>
 				) : (
@@ -97,4 +97,4 @@ const Post = () => {
 	)
 }
 
-export default Post
+export default JobBoardTony
