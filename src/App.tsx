@@ -22,6 +22,7 @@ import TodoForm from "./components/context/TodoForm";
 import TodoList from "./components/context/TodoList";
 import TodoCount from "./components/context/TodoCount";
 import { TodoProvider } from "./contexts/TodoContext";
+import RefHook from "./pages/fundamental/RefHook";
 
 function App() {
 	const [mount, setMount] = React.useState(true);
@@ -80,6 +81,9 @@ function App() {
 				<TodoList />
 				<TodoCount />
 			</TodoProvider>
+
+			<br />
+			<RefHook />
 
 
 			<br />
