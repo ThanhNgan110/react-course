@@ -18,9 +18,14 @@ import TrafficLight from './sampleApp/TrafficLight'
 import { colors } from './sampleApp/mockData'
 import Post from './sampleApp/JobsBoard'
 import JobBoardTony from './sampleApp/JobsBoardTony'
+import TodoForm from "./components/context/TodoForm";
+import TodoList from "./components/context/TodoList";
+import TodoCount from "./components/context/TodoCount";
+import { TodoProvider } from "./contexts/TodoContext";
+import RefHook from "./pages/fundamental/RefHook";
 
 function App() {
-	const [mount, setMount] = React.useState(true)
+	const [mount, setMount] = React.useState(true);
 	return (
 		<>
 			<JSX />
@@ -62,15 +67,24 @@ function App() {
 			{mount && <EffectHook />}
 
 			<br />
-			<ContextHook />
-
-			<br />
 			<TrafficLight colors={colors} />
 			<br />
 			{/* <Post /> */}
 
 			<br />
 			<JobBoardTony />
+
+			<br />
+			<ContextHook />
+			<TodoProvider>
+				<TodoForm />
+				<TodoList />
+				<TodoCount />
+			</TodoProvider>
+
+			<br />
+			<RefHook />
+
 
 			<br />
 			<br />
