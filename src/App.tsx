@@ -23,6 +23,7 @@ import TodoList from "./components/context/TodoList";
 import TodoCount from "./components/context/TodoCount";
 import { TodoProvider } from "./contexts/TodoContext";
 import RefHook from "./pages/fundamental/RefHook";
+import PerformanceHook from "./pages/fundamental/PerformanceHook";
 
 function App() {
 	const [mount, setMount] = React.useState(true);
@@ -84,6 +85,9 @@ function App() {
 
 			<br />
 			<RefHook />
+
+			<br />
+			<PerformanceHook />
 
 
 			<br />

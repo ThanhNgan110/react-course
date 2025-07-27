@@ -1,3 +1,7 @@
+body {
+  padding: 10px;
+}
+
 .button {
   border: 1px solid #ff0000;
 }
@@ -16,4 +20,21 @@
 
 .box1:hover {
   display: none;
+}
+
+h1, h2, h3, h4 {
+  font-size: 30px;
+}
+
+input {
+  background-color: #fff;
+  border: 1px solid #000;
+}
+
+button {
+  border: 1px solid #000;
+  cursor: pointer;
+  background-color: gray;
+  color: #fff;
+  padding: 5px
 }

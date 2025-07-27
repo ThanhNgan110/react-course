@@ -69,4 +69,19 @@ $ git merge --no-ff develop
 
 ## React render
 - first render: component render with initial state
-- next render: component render with new stat
+- next render: component render with new state
+
+
+## Optimize performance 
+
+### Optimize performance web
+- how to web load fast.
+- how to fast load for first load
+- lighthouse: LCP, CLS, FCP ... 
+- load resource: html, js, css ...
+- render block resource
+
+### Optimize performance react
+- prevent component re-render unnecessary
+- lazy load component -> load component necessary
+- lazy load module -> only load when needed
