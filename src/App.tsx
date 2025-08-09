@@ -24,6 +24,7 @@ import TodoCount from "./components/context/TodoCount";
 import { TodoProvider } from "./contexts/TodoContext";
 import RefHook from "./pages/fundamental/RefHook";
 import PerformanceHook from "./pages/fundamental/PerformanceHook";
+import CustomHook from "./pages/fundamental/CustomHook";
 
 function App() {
 	const [mount, setMount] = React.useState(true);
@@ -88,6 +89,9 @@ function App() {
 
 			<br />
 			<PerformanceHook />
+
+			<br />
+			<CustomHook />
 
 
 			<br />
