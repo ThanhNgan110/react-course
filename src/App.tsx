@@ -25,6 +25,7 @@ import { TodoProvider } from "./contexts/TodoContext";
 import RefHook from "./pages/fundamental/RefHook";
 import PerformanceHook from "./pages/fundamental/PerformanceHook";
 import CustomHook from "./pages/fundamental/CustomHook";
+import ReactErrorBoundary from "./pages/fundamental/ReactErrorBoundary";
 
 function App() {
 	const [mount, setMount] = React.useState(true);
@@ -92,6 +93,9 @@ function App() {
 
 			<br />
 			<CustomHook />
+
+			<br />
+			<ReactErrorBoundary />
 
 
 			<br />

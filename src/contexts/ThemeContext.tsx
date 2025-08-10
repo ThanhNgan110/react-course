@@ -4,17 +4,27 @@ type Theme = "light" | "dark";
 
 
 interface ThemeContextProps {
-  theme: Theme
+  theme: Theme,
+  openErrorModal: boolean,
+  toggleOpenErrorModal: () => void
 }
 
 export const ThemeContext = React.createContext<ThemeContextProps | undefined>(undefined);
 
 export const ThemeProvider = ({ children }: React.PropsWithChildren) => {
-  const [theme] = React.useState<Theme>('dark')
+  const [theme] = React.useState<Theme>('dark');
+  const [openErrorModal, setOpenErrorModal] = React.useState(false);
+
+  function toggleOpenErrorModal() {
+    setOpenErrorModal(prevState => !prevState)
+  }
+
   return (
     <ThemeContext.Provider
       value={{
-        theme
+        theme,
+        openErrorModal,
+        toggleOpenErrorModal
       }}
     >
       {children}

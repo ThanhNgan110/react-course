@@ -5,6 +5,9 @@ import App from './App.tsx'
 import './styles/index.css';
 import { SidebarProvider } from './contexts/SidebarContext.tsx';
 import { ThemeProvider } from './contexts/ThemeContext.tsx';
+import { initRequest } from './services/initRequest.ts';
+
+initRequest();
 
 createRoot(document.getElementById('root')!).render(
   // <StrictMode>
