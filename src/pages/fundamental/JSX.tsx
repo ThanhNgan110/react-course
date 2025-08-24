@@ -1,9 +1,11 @@
 import React from "react"
+import { useNavigate } from "react-router";
 
 /*
  function component only render one parent element
 */
 function JSX() {
+  const navigate = useNavigate();
   const expression = 1 + 1; // expression js
   const renderButton = (
     <button type="button">Button JSX</button>
@@ -20,7 +22,8 @@ function JSX() {
      <h1>JSX</h1>
      Expression: {expression} <br />
      Function JSX: {renderButtonByFunction()} <br />
-     JSX: {renderButton}
+     JSX: {renderButton} <br />
+     <button type="button" onClick={() => navigate('/state')}>Go to State</button>
     </React.Fragment>
   )
 }

@@ -32,7 +32,7 @@ function reducer(state = initialState, action: { type: string, payload: any }): 
     case 'DELETE_TODO': {
       return {
         ...state,
-        todos: state.todos.filter(todo => todo.id !== action.payload)
+        todos: state.todos.filter((todo: any) => todo.id !== action.payload)
       }
     }
     default:
