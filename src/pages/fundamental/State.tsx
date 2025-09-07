@@ -1,10 +1,12 @@
 import React from 'react'
+import { useNavigate } from 'react-router';
 
 /*
 - first render: render UI with initial state
 - re-render (next render); render UI with new state
 */
 function State() {
+  const navigate = useNavigate();
   const [count, setCount] = React.useState(1); // number - compare value
   const [message, setMessage] = React.useState({
     text: 'Ngan',
@@ -36,6 +38,10 @@ function State() {
       }
     })
   }
+  
+  function onPayment() {
+    navigate('/payment')
+  }
 
   console.log('State render: ', message)
   return (
@@ -46,6 +52,8 @@ function State() {
 
       Message: {message.text} <br />
       <button type="button" onClick={updateMessage}>Update Message</button><br /><br />
+
+      <button type="button" onClick={onPayment}>Payment</button><br /><br />
     </div>
   )
 }

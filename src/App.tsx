@@ -12,6 +12,7 @@ import StateHook from "./pages/fundamental/StateHook";
 import EffectHook from "./pages/fundamental/EffectHook";
 import React from "react";
 import ContextHook from "./pages/fundamental/ContextHook";
+import User from "./pages/fundamental/User";
 
 import TrafficLight from './sampleApp/TrafficLight'
 
@@ -25,10 +26,24 @@ import RefHook from "./pages/fundamental/RefHook";
 import PerformanceHook from "./pages/fundamental/PerformanceHook";
 import CustomHook from "./pages/fundamental/CustomHook";
 import ReactErrorBoundary from "./pages/fundamental/ReactErrorBoundary";
-import { Link, NavLink, Route, Routes } from "react-router";
+import { Link, Navigate, NavLink, Route, Routes, useLocation } from "react-router";
+import Profile from "./components/user/Profile";
+import Account from "./components/user/Account";
+import AccountDetail from "./components/user/AccountDetail";
+import Bookeeper from "./pages/fundamental/Bookeeper";
+import Login from "./pages/fundamental/Login";
+import AuthRoute from "./routes/AuthRoute";
+import ProtectedRoute from "./routes/ProtectedRoute";
+import Payment from "./pages/fundamental/Payment";
 
 function App() {
 	const [mount, setMount] = React.useState(true);
+	const location = useLocation();
+
+	React.useEffect(() => {
+		console.log('location: ', location)
+	}, [location])
+
 	return (
 		<>
 			<nav className="bg-white border-gray-200 dark:bg-gray-900">
@@ -109,6 +124,42 @@ function App() {
 									Demo Children
 								</NavLink>
 							</li>
+							<li>
+								<NavLink
+									to="/user"
+									className="block py-2 px-3 text-white rounded-sm md:bg-transparent md:p-0 dark:text-white"
+									aria-current="page"
+								>
+									User
+								</NavLink>
+							</li>
+							<li>
+								<NavLink
+									to="/bookeeper"
+									className="block py-2 px-3 text-white rounded-sm md:bg-transparent md:p-0 dark:text-white"
+									aria-current="page"
+								>
+									Bookeeper
+								</NavLink>
+							</li>
+							<li>
+								<NavLink
+									to="/payment"
+									className="block py-2 px-3 text-white rounded-sm md:bg-transparent md:p-0 dark:text-white"
+									aria-current="page"
+								>
+									Payment
+								</NavLink>
+							</li>
+							<li>
+								<NavLink
+									to="/login"
+									className="block py-2 px-3 text-white rounded-sm md:bg-transparent md:p-0 dark:text-white"
+									aria-current="page"
+								>
+									Login
+								</NavLink>
+							</li>
 						</ul>
 					</div>
 				</div>
@@ -120,6 +171,19 @@ function App() {
 				<Route path="/props" element={<Props />} />
 				<Route path="/state" element={<State />} />
 				<Route path="/demo-children" element={<DemoChildren />} />
+				{/* <Route path="/user" element={<User />} />
+				<Route path="/user/profile" element={<Profile />} />
+				<Route path="/user/account" element={<Account />} /> */}
+
+				<Route path="/user" element={<ProtectedRoute><User /></ProtectedRoute>}>
+					<Route index element={<Navigate to="profile" />} />
+					<Route path="profile" element={<Profile />} />
+					<Route path="account" element={<Account />} />
+					<Route path="account/:accountId" element={<AccountDetail />} />
+				</Route>
+				<Route path="/bookeeper" element={<Bookeeper />} />
+				<Route path="/login" element={<AuthRoute><Login /></AuthRoute>} />
+				<Route path="/payment" element={<ProtectedRoute><Payment /></ProtectedRoute>} />
 			</Routes>
 		
 			<br />
