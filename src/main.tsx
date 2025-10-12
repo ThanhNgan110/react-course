@@ -7,11 +7,14 @@ import { SidebarProvider } from './contexts/SidebarContext.tsx';
 import { ThemeProvider } from './contexts/ThemeContext.tsx';
 import { initRequest } from './services/initRequest.ts';
 import { BrowserRouter } from 'react-router';
+import { Provider } from 'react-redux';
+import { store } from './store.ts';
 
 initRequest();
 
 createRoot(document.getElementById('root')!).render(
   // <StrictMode>
+  <Provider store={store}>
     <BrowserRouter>
       <ThemeProvider>
         <SidebarProvider>
@@ -19,5 +22,6 @@ createRoot(document.getElementById('root')!).render(
         </SidebarProvider>
       </ThemeProvider>
     </BrowserRouter>
+  </Provider>
   // </StrictMode>,
 )

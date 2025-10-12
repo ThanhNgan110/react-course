@@ -35,6 +35,7 @@ import Login from "./pages/fundamental/Login";
 import AuthRoute from "./routes/AuthRoute";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import Payment from "./pages/fundamental/Payment";
+import Chart from "./pages/fundamental/Chart";
 
 function App() {
 	const [mount, setMount] = React.useState(true);
@@ -153,6 +154,15 @@ function App() {
 							</li>
 							<li>
 								<NavLink
+									to="/chart"
+									className="block py-2 px-3 text-white rounded-sm md:bg-transparent md:p-0 dark:text-white"
+									aria-current="page"
+								>
+									Chart
+								</NavLink>
+							</li>
+							<li>
+								<NavLink
 									to="/login"
 									className="block py-2 px-3 text-white rounded-sm md:bg-transparent md:p-0 dark:text-white"
 									aria-current="page"
@@ -184,6 +194,7 @@ function App() {
 				<Route path="/bookeeper" element={<Bookeeper />} />
 				<Route path="/login" element={<AuthRoute><Login /></AuthRoute>} />
 				<Route path="/payment" element={<ProtectedRoute><Payment /></ProtectedRoute>} />
+				<Route path="/chart" element={<ProtectedRoute><Chart /></ProtectedRoute>} />
 			</Routes>
 		
 			<br />
